@@ -1,0 +1,26 @@
+plugins {
+    id 'java-library'
+}
+
+group = 'org.ex2.anchor'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        url "https://s01.oss.sonatype.org/content/repositories/releases/"
+    }
+}
+
+dependencies {
+    implementation 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.12.5'
+    implementation 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    implementation 'com.fasterxml.jackson.module:jackson-module-parameter-names:2.13.0'
+
+    testImplementation 'junit:junit:4.13'
+}
+
+test {
+    useJUnit()
+}
