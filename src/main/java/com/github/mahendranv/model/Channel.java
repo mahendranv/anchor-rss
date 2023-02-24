@@ -1,4 +1,4 @@
-package com.ex2.anchor.model;
+package com.github.mahendranv.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

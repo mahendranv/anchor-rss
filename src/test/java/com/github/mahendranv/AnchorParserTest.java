@@ -1,7 +1,7 @@
-package com.ex2.anchor;
+package com.github.mahendranv;
 
-import com.ex2.anchor.model.AnchorResult;
-import com.ex2.anchor.model.StatusCode;
+import com.github.mahendranv.model.AnchorResult;
+import com.github.mahendranv.model.StatusCode;
 import org.junit.Test;
 
 import java.net.URL;

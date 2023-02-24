@@ -1,4 +1,4 @@
-package com.ex2.anchor.model;
+package com.github.mahendranv.model;
 
 public enum StatusCode {
     SUCCESS,

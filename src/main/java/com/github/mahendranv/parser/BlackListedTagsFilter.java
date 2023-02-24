@@ -1,4 +1,4 @@
-package com.ex2.anchor.parser;
+package com.github.mahendranv.parser;
 
 import javax.xml.namespace.QName;
 import javax.xml.stream.StreamFilter;

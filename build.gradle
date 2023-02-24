@@ -1,14 +1,27 @@
 plugins {
+    id 'maven-publish'
     id 'java-library'
 }
 
-group = 'org.ex2.anchor'
-version = '1.0-SNAPSHOT'
+group = 'org.github.mahendranv'
+version = '1.0'
 
 repositories {
     mavenCentral()
     maven {
         url "https://s01.oss.sonatype.org/content/repositories/releases/"
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            groupId = group
+            artifactId = 'anchor-rss'
+            version = version
+
+            from components.java
+        }
     }
 }
 

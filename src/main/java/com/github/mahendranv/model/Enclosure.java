@@ -1,4 +1,4 @@
-package com.ex2.anchor.model;
+package com.github.mahendranv.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import lombok.Getter;

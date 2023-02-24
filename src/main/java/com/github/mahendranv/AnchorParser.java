@@ -1,9 +1,9 @@
-package com.ex2.anchor;
+package com.github.mahendranv;
 
-import com.ex2.anchor.model.AnchorResult;
-import com.ex2.anchor.model.Rss;
-import com.ex2.anchor.model.StatusCode;
-import com.ex2.anchor.parser.BlackListedTagsFilter;
+import com.github.mahendranv.model.AnchorResult;
+import com.github.mahendranv.model.Rss;
+import com.github.mahendranv.model.StatusCode;
+import com.github.mahendranv.parser.BlackListedTagsFilter;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
