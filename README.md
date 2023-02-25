@@ -4,8 +4,7 @@
 
 WIP 🚧: A simple java-lib backed by Jackson XML parser.
 
-## Usage
-
+## Getting Started
 Add gradle dependency to the project. Make sure to add the jitpack repo to maven repos list.
 ```groovy
 allprojects {
@@ -20,7 +19,24 @@ dependencies {
 }
 ```
 
-Call the parser with feed URL.
+### 🚨 Android Only
+This library uses Jackson to parse XML. So, you'll end up seeing this error when including the lib in your projects.
+```
+java.lang.NoClassDefFoundError: Failed resolution of: Ljavax/xml/stream/XMLInputFactory;
+```
+
+Because `javax.xml.stream` API is not included in the Android platform. While the javax.xml.stream API is part of the Java SE platform, it's not included in the Android platform by default. As a result, if you try to use the javax.xml.stream API in your Android app, you may run into runtime errors like the NoClassDefFoundError that you're seeing.
+
+To fix this error, you can include the javax.xml.stream API in your app by adding the following dependency to your build.gradle 
+```groovy
+implementation 'javax.xml.stream:stax-api:1.0-2'
+```
+This dependency provides the javax.xml.stream API and should resolve the NoClassDefFoundError that you're seeing.
+
+
+## API call
+Call the parser with feed URL. And read through the `AnchorResult` model to consume parsed content.
+
 ```java
 String feedXmlUrl = "https://anchor.fm/s/e337170/podcast/rss";
 AnchorResult result = AnchorParser.parse(strUrl);
@@ -44,10 +60,12 @@ switch (result.getStatusCode()) {
 ## TODO
 - [x] Github release pipeline
 - [x] Gitpack release
-- [ ] Android support
+- [x] Android support
 
 ## Releases
-
+### V_0.2
++ Support for Android 
++ Moved to manual `local_name` collision handling for better flexibility
 ### V_0.1
 Initial setup for model classes and parser. Models are mapped as is from XML without processing.
 + Parsing season and episode fields now

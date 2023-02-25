@@ -1,14 +1,12 @@
 package com.github.mahendranv;
 
+import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.github.mahendranv.model.AnchorResult;
 import com.github.mahendranv.model.Rss;
 import com.github.mahendranv.model.StatusCode;
-import com.github.mahendranv.parser.BlackListedTagsFilter;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import lombok.val;
 
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLStreamReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -19,12 +17,9 @@ public class AnchorParser {
         AnchorResult result = new AnchorResult();
         XmlMapper mapper = new XmlMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
         try {
-            XMLInputFactory inputFactory = XMLInputFactory.newFactory();
-            XMLStreamReader reader = inputFactory.createXMLStreamReader(new URL(urlString).openStream());
-            XMLStreamReader filtered = inputFactory.createFilteredReader(reader, BlackListedTagsFilter.DEFAULT);
-            Rss rss = mapper.readValue(filtered, Rss.class);
+            val url = new URL(urlString);
+            Rss rss = mapper.readValue(url, Rss.class);
             result.setRss(rss);
             result.setStatusCode(StatusCode.SUCCESS);
         } catch (MalformedURLException e) {

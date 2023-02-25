@@ -1,6 +1,8 @@
 package com.github.mahendranv.model;
 
+import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -9,6 +11,7 @@ import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Getter
 @Setter
@@ -16,14 +19,14 @@ public class Channel {
     @JacksonXmlProperty(localName = "title")
     private String title;
 
-    @JacksonXmlProperty(localName = "link")
+    @JsonIgnore
     private String link;
 
     @JacksonXmlProperty(localName = "description")
     private String description;
 
-    @JacksonXmlProperty(localName = "image", namespace = "")
-    private Image image;
+    @JsonIgnore
+    private String image;
 
     @JacksonXmlProperty(localName = "item")
     @JacksonXmlElementWrapper(useWrapping = false)
@@ -33,4 +36,17 @@ public class Channel {
     @JsonProperty("lastBuildDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE, dd MMM yyyy HH:mm:ss Z")
     private Date lastBuildDate;
+
+    // Conflict resolution
+    @JsonAnySetter
+    public void setImage(String name, Object value) {
+        if ("image".equals(name) && (value instanceof Map)) {
+            if (((Map<?, ?>) value).containsKey("href")) {
+                image = (String) ((Map<?, ?>) value).get("href");
+            }
+        }
+        if ("link".equals(name) && value instanceof String) {
+            link = (String) value;
+        }
+    }
 }
