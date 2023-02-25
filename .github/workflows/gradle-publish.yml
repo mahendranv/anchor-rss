@@ -8,6 +8,8 @@
 name: Gradle Package
 
 on:
+  pull_request:
+    branches: ['main']
   release:
     types: [created]
 
