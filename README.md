@@ -1,8 +1,8 @@
-# Anchor RSS
+# Anchor RSS (WIP 🚧)
 
-[![JitPack](https://img.shields.io/github/v/release/mahendranv/anchor-rss?color=green&label=JitPack&logo=hackthebox&logoColor=white&style=for-the-badge)](https://jitpack.io/#mahendranv/anchor-rss) ![](https://img.shields.io/github/issues/mahendranv/anchor-rss?style=for-the-badge)
+[![JitPack](https://img.shields.io/github/v/release/mahendranv/anchor-rss?color=green&label=JitPack&logo=hackthebox&logoColor=white&style=for-the-badge)](https://jitpack.io/#mahendranv/anchor-rss) ![](https://img.shields.io/github/issues/mahendranv/anchor-rss?style=for-the-badge) ![](https://img.shields.io/github/issues-pr/mahendranv/anchor-rss?style=for-the-badge)
 
-WIP 🚧: A simple java-lib backed by Jackson XML parser.
+A java library to simplify the process of fetching and parsing RSS feeds of podcasts, making it easy to incorporate podcast data into Java or Android projects. This library provides first-class support for podcasts hosted on Anchor.fm and most of the iTunes-specific fields commonly used in podcast RSS feeds. 
 
 ## Getting Started
 Add gradle dependency to the project. Make sure to add the jitpack repo to maven repos list.
@@ -15,11 +15,14 @@ allprojects {
 }
 
 dependencies {
+    implementation 'javax.xml.stream:stax-api:1.0-2' // android only
     implementation 'com.github.mahendranv:anchor-rss:{latest-version}'
 }
 ```
 
-### 🚨 Android Only
+<details>
+<summary><h4>🚨 Android - Why do I need stax api?</h4></summary>
+
 This library uses Jackson to parse XML. So, you'll end up seeing this error when including the lib in your projects.
 ```
 java.lang.NoClassDefFoundError: Failed resolution of: Ljavax/xml/stream/XMLInputFactory;
@@ -32,7 +35,7 @@ To fix this error, you can include the javax.xml.stream API in your app by addin
 implementation 'javax.xml.stream:stax-api:1.0-2'
 ```
 This dependency provides the javax.xml.stream API and should resolve the NoClassDefFoundError that you're seeing.
-
+</details>
 
 ## API call
 Call the parser with feed URL. And read through the `AnchorResult` model to consume parsed content.
