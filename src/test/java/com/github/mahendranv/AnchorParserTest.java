@@ -5,26 +5,41 @@ import com.github.mahendranv.model.Channel;
 import com.github.mahendranv.model.StatusCode;
 import org.junit.Test;
 
-import java.net.URL;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 public class AnchorParserTest {
 
-    String svk = "https://anchor.fm/s/e337170/podcast/rss";
+    @Test
+    public void test_parse_anchor_svk() {
+        AnchorResult result = AnchorParser.parse(TestResources.RSS_SVK);
+        Channel channel = assertMandatoryFields(result);
+        assertEquals(108, result.getChannel().getItems().size());
+        assertTrue(channel.isExplicit());
+        assertTrue(channel.getItems().get(0).isExplicit());
+    }
 
     @Test
-    public void test_parse() {
-        URL url = getClass().getClassLoader().getResource("feeds/svk_20230220.xml");
-        String strUrl = url.toString();
+    public void test_parse_simple_fragmented() {
+        AnchorResult result = AnchorParser.parse(TestResources.RSS_FRAGMENTED);
+        Channel channel = assertMandatoryFields(result);
+        assertFalse(channel.isExplicit());
+        assertFalse(channel.getItems().get(0).isExplicit());
+        assertEquals(242, channel.getItems().size());
+    }
 
-        AnchorResult result = AnchorParser.parse(strUrl);
-        Channel channel = result.getRss().getChannel();
-        System.out.println("Result " + result);
+    /**
+     * Validates mandatory fields in the restult and returns the channel
+     *
+     * @param result result from parser
+     * @return the channel
+     */
+    private Channel assertMandatoryFields(AnchorResult result) {
         assertEquals(StatusCode.SUCCESS, result.getStatusCode());
+        Channel channel = result.getChannel();
+        assertNotNull("Channel title cannot be null: ", channel.getTitle());
         assertNotNull("Channel image URL is not null: ", channel.getImage());
         assertNotNull("Channel link cannot be null: ", channel.getLink());
-        assertEquals(108, channel.getItems().size());
+        assertNotNull("Channel last build date cannot be null: ", channel.getLastBuildDate());
+        return channel;
     }
 }

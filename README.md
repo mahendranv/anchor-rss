@@ -45,8 +45,8 @@ String feedXmlUrl = "https://anchor.fm/s/e337170/podcast/rss";
 AnchorResult result = AnchorParser.parse(strUrl);
 switch (result.getStatusCode()) {
     case SUCCESS:
-        String podcastTitle = result.getRss().getChannel().getTitle();
-        List<Item> episodes = result.getRss().getChannel().getItems();
+        String podcastTitle = result.getChannel().getTitle();
+        List<Item> episodes = result.getChannel().getItems();
     break;
     case IO_EXCEPTION:
         // Connectivity error
@@ -65,13 +65,7 @@ switch (result.getStatusCode()) {
 - [x] Gitpack release
 - [x] Android support
 
-## Releases
-### V_0.2
-+ Support for Android 
-+ Moved to manual `local_name` collision handling for better flexibility
-### V_0.1
-Initial setup for model classes and parser. Models are mapped as is from XML without processing.
-+ Parsing season and episode fields now
+## Releases - See [Changelog](./docs/RELEASES.md)
 
 ## License
 ```

@@ -20,7 +20,7 @@ public class AnchorParser {
         try {
             val url = new URL(urlString);
             Rss rss = mapper.readValue(url, Rss.class);
-            result.setRss(rss);
+            result.setChannel(rss.getChannel());
             result.setStatusCode(StatusCode.SUCCESS);
         } catch (MalformedURLException e) {
             result.setStatusCode(StatusCode.INVALID_URL);

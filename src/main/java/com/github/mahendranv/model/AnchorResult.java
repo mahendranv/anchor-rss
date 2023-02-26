@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class AnchorResult {
 
-    private Rss rss;
+    private Channel channel;
 
     private StatusCode statusCode;
 

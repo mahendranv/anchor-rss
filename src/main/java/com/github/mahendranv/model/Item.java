@@ -2,7 +2,9 @@ package com.github.mahendranv.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.github.mahendranv.parser.AnchorBooleanDeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,6 +37,10 @@ public class Item {
     @JacksonXmlProperty(localName = "episode")
     @JsonProperty("episode")
     private int episode;
+
+    @JacksonXmlProperty(localName = "explicit")
+    @JsonDeserialize(using = AnchorBooleanDeSerializer.class)
+    private boolean explicit;
 
     @JacksonXmlProperty(localName = "pubDate")
     @JsonProperty("pubDate")

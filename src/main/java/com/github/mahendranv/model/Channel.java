@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonAnySetter;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+import com.github.mahendranv.parser.AnchorBooleanDeSerializer;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,6 +29,10 @@ public class Channel {
 
     @JsonIgnore
     private String image;
+
+    @JacksonXmlProperty(localName = "explicit")
+    @JsonDeserialize(using = AnchorBooleanDeSerializer.class)
+    private boolean explicit;
 
     @JacksonXmlProperty(localName = "item")
     @JacksonXmlElementWrapper(useWrapping = false)
