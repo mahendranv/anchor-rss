@@ -5,6 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.github.mahendranv.parser.AnchorBooleanDeSerializer;
+import com.github.mahendranv.parser.DurationDeserializer;
+import com.github.mahendranv.utils.SecondsConverter;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -46,4 +48,13 @@ public class Item {
     @JsonProperty("pubDate")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE, dd MMM yyyy HH:mm:ss Z")
     private Date pubDate;
+
+    @JacksonXmlProperty(localName = "duration")
+    @JsonProperty("duration")
+    @JsonDeserialize(using = DurationDeserializer.class)
+    private long durationInSeconds;
+
+    public String getPrintableDuration() {
+        return SecondsConverter.secondsToString(durationInSeconds);
+    }
 }

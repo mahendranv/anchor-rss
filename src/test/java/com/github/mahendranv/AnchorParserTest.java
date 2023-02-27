@@ -13,9 +13,11 @@ public class AnchorParserTest {
     public void test_parse_anchor_svk() {
         AnchorResult result = AnchorParser.parse(TestResources.RSS_SVK);
         Channel channel = assertMandatoryFields(result);
+        assertEquals(TestResources.RSS_SVK, channel.getFeedUrl());
         assertEquals(108, result.getChannel().getItems().size());
         assertTrue(channel.isExplicit());
         assertTrue(channel.getItems().get(0).isExplicit());
+        assertEquals("Comedy", channel.getCategory());
     }
 
     @Test
@@ -25,6 +27,7 @@ public class AnchorParserTest {
         assertFalse(channel.isExplicit());
         assertFalse(channel.getItems().get(0).isExplicit());
         assertEquals(242, channel.getItems().size());
+        assertEquals("Technology", channel.getCategory());
     }
 
     /**

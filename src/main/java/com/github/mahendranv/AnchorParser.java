@@ -5,7 +5,6 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.github.mahendranv.model.AnchorResult;
 import com.github.mahendranv.model.Rss;
 import com.github.mahendranv.model.StatusCode;
-import lombok.val;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -18,8 +17,9 @@ public class AnchorParser {
         XmlMapper mapper = new XmlMapper();
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         try {
-            val url = new URL(urlString);
+            URL url = new URL(urlString);
             Rss rss = mapper.readValue(url, Rss.class);
+            rss.getChannel().setFeedUrl(urlString);
             result.setChannel(rss.getChannel());
             result.setStatusCode(StatusCode.SUCCESS);
         } catch (MalformedURLException e) {

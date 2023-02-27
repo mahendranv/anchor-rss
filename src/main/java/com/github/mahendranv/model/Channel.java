@@ -22,10 +22,16 @@ public class Channel {
     private String title;
 
     @JsonIgnore
+    private String feedUrl;
+
+    @JsonIgnore
     private String link;
 
     @JacksonXmlProperty(localName = "description")
     private String description;
+
+    @JsonIgnore
+    private String category;
 
     @JsonIgnore
     private String image;
@@ -53,6 +59,11 @@ public class Channel {
         }
         if ("link".equals(name) && value instanceof String) {
             link = (String) value;
+        }
+        if ("category".equals(name) && value instanceof Map) {
+            if (((Map<?, ?>) value).containsKey("text")) {
+                category = (String) ((Map<?, ?>) value).get("text");
+            }
         }
     }
 }
