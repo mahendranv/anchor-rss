@@ -51,7 +51,7 @@ public class Channel {
 
     // Conflict resolution
     @JsonAnySetter
-    public void setImage(String name, Object value) {
+    public void processUnknown(String name, Object value) {
         if ("image".equals(name) && (value instanceof Map)) {
             if (((Map<?, ?>) value).containsKey("href")) {
                 image = (String) ((Map<?, ?>) value).get("href");

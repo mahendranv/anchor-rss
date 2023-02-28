@@ -8,7 +8,11 @@
 #### Added
   - AnchorResult # channel
   - Channel # explicit
+  - Channel # category
+  - Channel # feedUrl
   - Item # explicit
+  - Item # durationInSeconds
+  - Item # Enclosure (url, length, type)
 
 ---
 ## V_0.2

@@ -7,9 +7,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class Enclosure {
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(localName = "url", isAttribute = true)
     private String url;
 
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(localName = "type", isAttribute = true)
     private String type;
+
+    @JacksonXmlProperty(localName = "length", isAttribute = true)
+    private long length;
 }

@@ -54,6 +54,9 @@ public class Item {
     @JsonDeserialize(using = DurationDeserializer.class)
     private long durationInSeconds;
 
+    @JacksonXmlProperty(localName = "enclosure")
+    private Enclosure enclosure;
+
     public String getPrintableDuration() {
         return SecondsConverter.secondsToString(durationInSeconds);
     }
