@@ -53,8 +53,11 @@ public class Channel {
     @JsonAnySetter
     public void processUnknown(String name, Object value) {
         if ("image".equals(name) && (value instanceof Map)) {
-            if (((Map<?, ?>) value).containsKey("href")) {
-                image = (String) ((Map<?, ?>) value).get("href");
+            Map<?,?> map = (Map<?, ?>) value;
+            if (map.containsKey("href")) {
+                image = (String) map.get("href");
+            } else if (map.containsKey("url")) {
+                image = (String) map.get("url");
             }
         }
         if ("link".equals(name) && value instanceof String) {

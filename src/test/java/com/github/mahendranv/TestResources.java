@@ -8,4 +8,6 @@ public class TestResources {
 
     static String RSS_SVK = asUrl("feeds/svk_20230220.xml");
     static String RSS_FRAGMENTED = asUrl("feeds/fragmented.xml");
+
+    static String RSS_FRAGMENTED_REMOTE = "https://fragmentedpodcast.com/feed/";
 }

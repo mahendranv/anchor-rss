@@ -32,6 +32,15 @@ public class AnchorParserTest {
         assertEquals("Technology", channel.getCategory());
     }
 
+    @Test
+    public void test_parse_simple_fragmented_remote() {
+        AnchorResult result = AnchorParser.parse(TestResources.RSS_FRAGMENTED_REMOTE);
+        Channel channel = assertMandatoryFields(result);
+        assertFalse(channel.isExplicit());
+        assertFalse(channel.getItems().get(0).isExplicit());
+        assertNotNull(channel.getItems().get(0).getEnclosure().getUrl());
+    }
+
     /**
      * Validates mandatory fields in the restult and returns the channel
      *
