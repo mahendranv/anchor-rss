@@ -1,11 +1,10 @@
 package com.github.mahendranv.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 public class Enclosure {
     @JacksonXmlProperty(localName = "url", isAttribute = true)
     private String url;

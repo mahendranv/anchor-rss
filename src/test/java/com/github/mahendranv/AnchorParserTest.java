@@ -17,7 +17,7 @@ public class AnchorParserTest {
         assertEquals(108, result.getChannel().getItems().size());
         assertTrue(channel.isExplicit());
         assertTrue(channel.getItems().get(0).isExplicit());
-        assertNotNull(channel.getItems().get(0).getEnclosure().getUrl());
+        assertNotNull(channel.getItems().get(0).getStreamUrl());
         assertEquals("Comedy", channel.getCategory());
     }
 
@@ -27,7 +27,7 @@ public class AnchorParserTest {
         Channel channel = assertMandatoryFields(result);
         assertFalse(channel.isExplicit());
         assertFalse(channel.getItems().get(0).isExplicit());
-        assertNotNull(channel.getItems().get(0).getEnclosure().getUrl());
+        assertNotNull(channel.getItems().get(0).getStreamUrl());
         assertEquals(242, channel.getItems().size());
         assertEquals("Technology", channel.getCategory());
     }
@@ -38,7 +38,7 @@ public class AnchorParserTest {
         Channel channel = assertMandatoryFields(result);
         assertFalse(channel.isExplicit());
         assertFalse(channel.getItems().get(0).isExplicit());
-        assertNotNull(channel.getItems().get(0).getEnclosure().getUrl());
+        assertNotNull(channel.getItems().get(0).getStreamUrl());
     }
 
     /**

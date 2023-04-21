@@ -15,10 +15,32 @@ allprojects {
 }
 
 dependencies {
-    implementation 'javax.xml.stream:stax-api:1.0-2' // android only
     implementation 'com.github.mahendranv:anchor-rss:{latest-version}'
 }
 ```
+
+<details>
+<summary><h4>🚨 Android - additional setup</h4></summary>
+
+```groovy
+dependencies {
+    implementation 'javax.xml.stream:stax-api:1.0-2'
+    implementation 'com.fasterxml.woodstox:woodstox-core:6.5.0'
+}
+```
+
+```kotlin
+import com.ctc.wstx.stax.WstxInputFactory
+import com.ctc.wstx.stax.WstxOutputFactory
+import com.fasterxml.jackson.dataformat.xml.XmlFactory
+
+XmlFactory xmlFactory = XmlFactory.builder()
+                        .xmlInputFactory(WstxInputFactory())
+                        .xmlOutputFactory(WstxOutputFactory())
+                        .build()
+AnchorParser.setFactory(xmlFactory)
+```
+</details>
 
 <details>
 <summary><h4>🚨 Android - Why do I need stax api?</h4></summary>
@@ -59,6 +81,37 @@ switch (result.getStatusCode()) {
     break;
 }
 ```
+Example: reading common fields
+```java
+void exampleReadAttributes(Channel channel) {
+    channel.getTitle();
+    channel.getImage();
+
+    List<Item> episodes = channel.getItems();
+    Item episode = episodes.get(0);
+
+    // General
+    episode.getTitle();
+    episode.getDescription();
+
+    // Duration - integer and string representation.
+    episode.getPrintableDuration(); // HH:mm:ss 01:01:12
+    episode.getDurationInSeconds(); // 3600 + 60 + 12 = 3672
+
+    // Stream url
+    episode.getStreamUrl(); // Picks audio type enclosure
+
+    // Publish date
+    episode.getPubDate();
+
+    // If iTunes flovored attributes are present.
+    episode.getSeason();
+    episode.getEpisode();
+}
+
+```
+## Why naming uses Channel / Item instead of podcast / episode?
+Simply following the RSS xml naming convention. Deviating from the name would do no good than confusing the client apps. Apart from the original fields, there are helper/computed fields included to reduce mundane work. Feel free to request any additional fields if you see fit. Don't forget to provide a short use-case description and a sample feed url.
 
 ## TODO
 - [x] Github release pipeline

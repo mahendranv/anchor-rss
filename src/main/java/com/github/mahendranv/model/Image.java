@@ -1,11 +1,10 @@
 package com.github.mahendranv.model;
 
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
-import lombok.Getter;
-import lombok.Setter;
 
-@Setter
-@Getter
+import lombok.Data;
+
+@Data
 public class Image {
     @JacksonXmlProperty
     private String url;

@@ -8,15 +8,14 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.github.mahendranv.parser.AnchorBooleanDeSerializer;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-@Getter
-@Setter
+import lombok.Data;
+
+@Data
 public class Channel {
     @JacksonXmlProperty(localName = "title")
     private String title;
