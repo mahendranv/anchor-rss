@@ -27,8 +27,8 @@ publishing {
 
 dependencies {
     api 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.15.0'
-    implementation 'org.projectlombok:lombok:1.18.26'
-    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation 'org.projectlombok:lombok:1.18.28'
+    annotationProcessor 'org.projectlombok:lombok:1.18.28'
 
     testImplementation 'junit:junit:4.13.2'
 }
