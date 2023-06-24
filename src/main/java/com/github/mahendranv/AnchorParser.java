@@ -1,5 +1,6 @@
 package com.github.mahendranv;
 
+import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
@@ -31,9 +32,16 @@ public class AnchorParser {
         try {
             URL url = new URL(urlString);
             Rss rss = mapper.readValue(url, Rss.class);
+            if (rss.getChannel() == null) {
+                // Invalid state - possible case is well-formed XML - but not a rss
+                throw new JsonParseException("Failed to parse " + url);
+            }
             rss.getChannel().setFeedUrl(urlString);
             result.setChannel(rss.getChannel());
             result.setStatusCode(StatusCode.SUCCESS);
+        } catch (JsonParseException e) {
+            result.setStatusCode(StatusCode.PARSER_FAILURE);
+            handleException(result, e);
         } catch (MalformedURLException e) {
             result.setStatusCode(StatusCode.INVALID_URL);
             handleException(result, e);
@@ -41,7 +49,7 @@ public class AnchorParser {
             result.setStatusCode(StatusCode.IO_EXCEPTION);
             handleException(result, e);
         } catch (Exception e) {
-            result.setStatusCode(StatusCode.PARSER_FAILURE);
+            result.setStatusCode(StatusCode.UNKNOWN);
             handleException(result, e);
         }
         return result;

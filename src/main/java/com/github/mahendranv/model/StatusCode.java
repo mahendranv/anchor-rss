@@ -4,5 +4,6 @@ public enum StatusCode {
     SUCCESS,
     IO_EXCEPTION,
     INVALID_URL,
-    PARSER_FAILURE
+    PARSER_FAILURE,
+    UNKNOWN
 }
